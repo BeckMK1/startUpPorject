@@ -1,4 +1,4 @@
-# vue-fire-crud
+# spm-project
 
 ## Project setup
 ```
