@@ -1,26 +1,26 @@
 <template>
-  <div class="grid-container">
-    <article v-for="post in posts" :key="post.id">
-      <img :src="post.image" alt />
-      <h3>{{post.description}}</h3>
-    </article>
-  </div>
+    <div class="grid-container">
+        <article v-for="post in posts" :key="post.id">
+        <img :src="post.image" alt />
+        <h3>{{post.title}}</h3>
+        <p>{{post.description}}</p>
+        </article>
+    </div>
 </template>
 
 <script>
-import { postRef } from '../firebase-db'
+import { postRef } from "../firebase-db"
 export default {
-  data () {
-    return {
-      posts: []
-    }
+  data(){
+      return{
+          posts:[]
+   }
   },
-  firestore: {
-    posts: postRef
+  firestore:{
+      posts: postRef
   }
 }
 </script>
-
 <style>
 /* ---------- Grid container ---------- */
 .grid-container {
