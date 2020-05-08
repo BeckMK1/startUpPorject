@@ -11,7 +11,7 @@ import postList from '../components/PostList.vue'
 export default {
   name: 'Home',
   components: {
-    postList
+    postList,
   }
 }
 </script>

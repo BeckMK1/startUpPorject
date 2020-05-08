@@ -1,9 +1,16 @@
 <template>
     <div class="grid-container">
         <article v-for="post in posts" :key="post.id">
-        <img :src="post.image" alt />
+          <div class="all" v-bind:class="{display: display}">
+        <img v-on:click="display = !display" :src="post.image" alt />
         <h3>{{post.title}}</h3>
         <p>{{post.description}}</p>
+        <p>{{post.id}}</p>
+        </div>
+        <div class="single" v-bind:class="{display: !display}">
+         <img v-on:click="display = display" :src="post.image" alt />
+        <p>{{post.id.description}}</p>
+        </div>
         </article>
     </div>
 </template>
@@ -13,11 +20,14 @@ import { postRef } from "../firebase-db"
 export default {
   data(){
       return{
-          posts:[]
+          posts:[],
+          display:true,
    }
   },
   firestore:{
       posts: postRef
+  },
+  methods:{
   }
 }
 </script>
@@ -54,5 +64,25 @@ export default {
 .grid-container > article h3 {
   font-weight: 200;
   margin: 0 0 1.5em;
+}
+.detailed{
+display: none;
+}
+.test-box{
+width: 50px;
+height: 50px;
+background: black;
+}
+.all{
+display: none;
+}
+.all.display{
+display: block;
+}
+.single{
+  display: none;
+}
+.single.display{
+  display: block;
 }
 </style>
