@@ -1,15 +1,16 @@
 <template>
     <div class="grid-container">
         <article v-for="post in posts" :key="post.id">
-          <div class="all" v-bind:class="{display: display}">
-        <img v-on:click="display = !display" :src="post.image" alt />
+          <div class="allOfAll">
+          <div class="all" v-bind:class="{display: display}" v-on:click="display = !display, selected(post.id)">
+        <img :src="post.image" alt />
         <h3>{{post.title}}</h3>
         <p>{{post.description}}</p>
         <p>{{post.id}}</p>
+        <button v-on:click="deletePost(post)">delete</button>
         </div>
-        <div class="single" v-bind:class="{display: !display}">
-         <img v-on:click="display = display" :src="post.image" alt />
-        <p>{{post.id.description}}</p>
+        <div class="single" v-bind:class="{display: !display}" >
+        </div>
         </div>
         </article>
     </div>
@@ -28,6 +29,21 @@ export default {
       posts: postRef
   },
   methods:{
+  deletePost(post){
+  postRef.doc(post.id).delete();
+  },
+  selected: function (post, id) {
+    let selectedPost;
+    if(post.id === id){
+    selectedPost = post
+    }
+
+   document.querySelector(".single").innerHTML=`
+   img src="${selectedPost.image}">
+        <p>${selectedPost.description}</p>
+        <p>${selectedPost.id}</p>
+   `
+  }
   }
 }
 </script>
