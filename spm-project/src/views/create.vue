@@ -3,7 +3,7 @@
     <h1>Here you can add a new post</h1>
     <form>
       <input type="text" v-model="post.title" placeholder="type the title here" required>
-      <input type="text" v-model="post.discription" placeholder="type the description here">
+      <input type="text" v-model="post.description" placeholder="type the description here">
       <input type="file" ref="fileInput" accept="image/*" v-on:change="previewImage">
       <button class="add-image" type="button" v-on:click="triggerChooseImg">choose Image</button>
       <div>
@@ -22,7 +22,7 @@ data () {
   return{
     post: {
       title:'',
-      discription:'',
+      description:'',
       image: null
     }
   }
