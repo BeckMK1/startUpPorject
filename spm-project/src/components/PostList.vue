@@ -2,16 +2,14 @@
     <div class="grid-container">
         <article v-for="post in posts" :key="post.id">
           <div class="allOfAll">
-          <div class="all" v-if="display !== post.id" @click="nowDisplay(post)">
+          <div class="all" @click="goTodetail(post.id)">
         <img :src="post.image" alt />
         <h3>{{post.title}}</h3>
         <p>{{post.description}}</p>
-        <p>{{post.id}}</p>
         <button v-on:click="deletePost(post)">delete</button>
         </div>
-        <div class="displayNow">
-          <p>{{post.id}}</p>
         </div>
+        <div class="displayNow">
         </div>
         </article>
     </div>
@@ -23,20 +21,18 @@ export default {
   data(){
       return{
           posts:[],
-          newDisplay:'',
-          display: null,
-          displayed:''
    }
   },
   firestore:{
       posts: postRef
   },
+
   methods:{
   deletePost(post){
   postRef.doc(post.id).delete();
   },
-  nowDisplay(post){
-    this.display = post.id
+  goTodetail(postId){
+    this.$router.push({name:'details',params:{Pid:postId}})
   }
 }
 }
