@@ -2,14 +2,15 @@
     <div class="grid-container">
         <article v-for="post in posts" :key="post.id">
           <div class="allOfAll">
-          <div class="all" v-bind:class="{display: display}" v-on:click="display = !display, selected(post.id)">
+          <div class="all" v-if="display !== post.id" @click="nowDisplay(post)">
         <img :src="post.image" alt />
         <h3>{{post.title}}</h3>
         <p>{{post.description}}</p>
         <p>{{post.id}}</p>
         <button v-on:click="deletePost(post)">delete</button>
         </div>
-        <div class="single" v-bind:class="{display: !display}" >
+        <div class="displayNow">
+          <p>{{post.id}}</p>
         </div>
         </div>
         </article>
@@ -22,7 +23,9 @@ export default {
   data(){
       return{
           posts:[],
-          display:true,
+          newDisplay:'',
+          display: null,
+          displayed:''
    }
   },
   firestore:{
@@ -32,19 +35,10 @@ export default {
   deletePost(post){
   postRef.doc(post.id).delete();
   },
-  selected: function (post, id) {
-    let selectedPost;
-    if(post.id === id){
-    selectedPost = post
-    }
-
-   document.querySelector(".single").innerHTML=`
-   img src="${selectedPost.image}">
-        <p>${selectedPost.description}</p>
-        <p>${selectedPost.id}</p>
-   `
+  nowDisplay(post){
+    this.display = post.id
   }
-  }
+}
 }
 </script>
 <style>
@@ -88,17 +82,5 @@ display: none;
 width: 50px;
 height: 50px;
 background: black;
-}
-.all{
-display: none;
-}
-.all.display{
-display: block;
-}
-.single{
-  display: none;
-}
-.single.display{
-  display: block;
 }
 </style>
