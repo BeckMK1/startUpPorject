@@ -50,6 +50,28 @@ export default {
 </script>
 <style>
 /* ---------- Grid container ---------- */
+button {
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 12px 15px;
+  font-size: 1em;
+  border-radius: 0;
+  width: 100%;
+  max-width: 350px;
+  background-color:#42b983;
+  color: white;
+}
+
+
+input {
+  margin: 1em auto;
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 15px;
+  box-sizing: border-box;
+  display: block;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 100%;
