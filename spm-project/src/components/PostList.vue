@@ -1,6 +1,8 @@
 <template>
-    <div class="grid-container">
-        <article v-for="post in posts" :key="post.id">
+    <div>
+      <input class="search" type="text" v-model="search" placeholder="Search"/>
+      <div class="grid-container">
+        <article  v-for="post in filteredPosts" :key="post.id">
           <div class="allOfAll">
           <div class="all" @click="goTodetail(post.id)">
         <img :src="post.image" alt />
@@ -12,6 +14,7 @@
         <div class="displayNow">
         </div>
         </article>
+        </div>
     </div>
 </template>
 
@@ -21,6 +24,7 @@ export default {
   data(){
       return{
           posts:[],
+          search:''
    }
   },
   firestore:{
@@ -34,7 +38,14 @@ export default {
   goTodetail(postId){
     this.$router.push({name:'details',params:{Pid:postId}})
   }
-}
+  },
+  computed:{
+   filteredPosts: function(){
+    return this.posts.filter((post)=>{
+     return post.title.match(this.search) 
+    });
+   } 
+  }
 }
 </script>
 <style>
@@ -79,4 +90,5 @@ width: 50px;
 height: 50px;
 background: black;
 }
+
 </style>
